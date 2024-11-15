@@ -1,0 +1,78 @@
+{%extends 'base.html'%}
+{%block header%}
+    <div class="container"></div>
+        {{super()}}         
+    </div>
+{%endblock%}
+{%block main%}
+<!-- -------single product details--------- -->
+    <div class="small-container single-product">
+        <div class="row">
+            <div class="col-2">
+                <img src="{{url_for('static', filename = 'products/' + product.image1)}}" width="100%" id="ProductImg">
+                <div class="small-img-row">
+                    <div class="small-img-col">
+                        <img src="{{url_for('static', filename = 'products/' + product.image1)}}" width="100%" class="small-img">
+                    </div>
+                    <div class="small-img-col">
+                        <img src="{{url_for('static', filename = 'products/' + product.image2)}}" width="100%" class="small-img">
+                    </div>
+                    <div class="small-img-col">
+                        <img src="{{url_for('static', filename = 'products/' + product.image3)}}" width="100%" class="small-img">
+                    </div>
+                    <div class="small-img-col">
+                        <img src="{{url_for('static', filename = 'products/' + product.image4)}}" width="100%" class="small-img">
+                    </div>
+                </div>
+            </div>
+            <div class="col-2">
+                <p>Home / Product</p>
+                <h1>{{product.product_name}}</h1>
+                <h4>{{product.price}}$</h4>   
+                <h5 style="color: #424242;">In stock: {{product.quantity}}</h5>    
+                <form action="/add_to_cart" method="post" class="add-to-cart">
+                    <input type="number" name="quantity" value="1" min ="1" style="background-color: #c7c7c7;">
+                    <input type="hidden" name="csrf_token" value="{{ csrf_token() }}"/>
+                    <input type="hidden" name="product_id" value="{{product.product_id}}">
+                    <button type="submit" class="btn">Add To Cart</button>
+                </form>                       
+                <a href="/comparison/{{product.product_id}}" class="btn">Compare</a>
+                <h3><i class="fa-solid fa-indent"></i>   {{product.product_name}} Details </h3>
+                <br>
+                <p>{{product.description}}</p>
+            </div>
+        </div>
+    </div>
+
+<!-- -------title------- -->
+    <div class="small-container">
+        <div class="row row-2">
+            <h2>Related Products</h2>
+            <a href="{{url_for('products')}}"><p>View More</p></a>
+        </div>
+    </div>
+<!-- --------products------- -->
+    <div class="small-container">
+        {{related_products|safe}}
+    </div>
+{%endblock%}
+
+<!-- ---------sript-------------->
+{%block script%}
+<script>
+    var ProductImg = document.getElementById("ProductImg");
+    var SmallImg = document.getElementsByClassName("small-img");
+    SmallImg[0].onclick = function(){
+        ProductImg.src = SmallImg[0].src;
+    }
+    SmallImg[1].onclick = function(){
+        ProductImg.src = SmallImg[1].src;
+    }
+    SmallImg[2].onclick = function(){
+        ProductImg.src = SmallImg[2].src;
+    }
+    SmallImg[3].onclick = function(){
+        ProductImg.src = SmallImg[3].src;
+    }
+</script>
+{%endblock%}

@@ -1,0 +1,297 @@
+{%extends 'base.html'%}
+{%block header%}
+    <div class="container"></div>
+        {{super()}}    
+    </div>
+{%endblock%}
+{%block main%}
+    <div class="small-container">
+        <h2>Compare Products</h2>
+        <form action="\comparison\search_product\{{product1_result.product_id}}" method="post">
+            <input type="hidden" name="csrf_token" value="{{ csrf_token() }}"/>
+            <label for="product2">Compare with: </label>
+            <input type="text" name="product2" id="product2">
+            <input type="submit" value="Submit">
+        </form>
+
+        <div class="row">
+            <div class="col-2">
+                <img src="{{url_for('static', filename = 'products/' + product1_result.product_image)}}" alt="{{product1_result.product_name}}" width="50%">
+                <p>{{product1_result.product_name}}</p>
+            </div>
+            <div class="col-2">
+                {%if product2_result%}
+                <img src="{{url_for('static', filename = 'products/' + product2_result.product_image)}}" alt="{{product2_result.product_name}}" width="50%">
+                <p>{{product2_result.product_name}}</p>
+                {%endif%}
+            </div>
+        </div>
+        <div style="margin-bottom: 50px;"></div>
+        <table class="comparison-table">
+            <tr>
+                <th colspan="2" style="width:30%">Specification</th>
+                <th style="width:35%">{{product1_result.product_name}}</th>
+                {% if product2_result %}
+                    <th style="width:35%">{{product2_result.product_name}}</th>
+                {% endif %}
+            </tr>
+            <tr>
+                <th rowspan="2">LAUNCH</th>
+                <th>Announced</th>
+                <td>{{product1_specs.announced}}</td>
+                {% if product2_specs %}
+                <td>{{ product2_specs.announced }}</td>
+                {% endif %}
+            </tr>
+            <tr>
+                <th>Status</th>
+                <td>{{product1_specs.status}}</td>
+                {% if product2_specs %}
+                <td>{{ product2_specs.status }}</td>
+                {% endif %}
+            </tr>
+            <tr>
+                <th rowspan="4">BODY</th>
+                <th>Dimensions</th>
+                <td>{{product1_specs.dimensions}}</td>
+                {% if product2_specs %}
+                <td>{{ product2_specs.dimensions }}</td>
+                {% endif %}
+            </tr>
+            <tr>
+                <th>Weight</th>
+                <td>{{product1_specs.weight}}</td>
+                {% if product2_specs %}
+                <td>{{ product2_specs.weight }}</td>
+                {% endif %}
+            </tr>
+            <tr>
+                <th>Build</th>
+                <td>{{product1_specs.build}}</td>
+                {% if product2_specs %}
+                <td>{{ product2_specs.build }}</td>
+                {% endif %}
+            </tr>   
+            <tr>
+                <th>SIM</th>
+                <td>{{product1_specs.SIM}}</td>
+                {% if product2_specs %}
+                <td>{{ product2_specs.SIM }}</td>
+                {% endif %}
+            </tr>
+            <tr>
+                <th rowspan="4">DISPLAY</th>
+                <th>Type</th>
+                <td>{{product1_specs.type}}</td>
+                {% if product2_specs %}
+                <td>{{ product2_specs.type }}</td>
+                {% endif %}
+            </tr>
+            <tr>
+                <th>Size</th>
+                <td>{{product1_specs.size}}</td>
+                {% if product2_specs %}
+                <td>{{ product2_specs.size }}</td>
+                {% endif %}
+            </tr>
+            <tr>
+                <th>Resolution</th>
+                <td>{{product1_specs.resolution}}</td>
+                {% if product2_specs %}
+                <td>{{ product2_specs.resolution }}</td>
+                {% endif %}
+            </tr>   
+            <tr>
+                <th>Protection</th>
+                <td>{{product1_specs.protection}}</td>
+                {% if product2_specs %}
+                <td>{{ product2_specs.protection }}</td>
+                {% endif %}
+            </tr>
+            <tr>
+                <th rowspan="4">PLATFORM</th>
+                <th>OS</th>
+                <td>{{product1_specs.OS}}</td>
+                {% if product2_specs %}
+                <td>{{ product2_specs.OS }}</td>
+                {% endif %}
+            </tr>
+            <tr>
+                <th>Chipset</th>
+                <td>{{product1_specs.chipset}}</td>
+                {% if product2_specs %}
+                <td>{{ product2_specs.chipset }}</td>
+                {% endif %}
+            </tr>
+            <tr>
+                <th>CPU</th>
+                <td>{{product1_specs.CPU}}</td>
+                {% if product2_specs %}
+                <td>{{ product2_specs.CPU }}</td>
+                {% endif %}
+            </tr>   
+            <tr>
+                <th>GPU</th>
+                <td>{{product1_specs.GPU}}</td>
+                {% if product2_specs %}
+                <td>{{ product2_specs.GPU }}</td>
+                {% endif %}
+            </tr>
+            <tr>
+                <th rowspan="2">MEMORY</th>
+                <th>Card slot</th>
+                <td>{{product1_specs.card_slot}}</td>
+                {% if product2_specs %}
+                <td>{{ product2_specs.card_slot }}</td>
+                {% endif %}
+            </tr>
+            <tr>
+                <th>Internal</th>
+                <td>{{product1_specs.internal}}</td>
+                {% if product2_specs %}
+                <td>{{ product2_specs.internal }}</td>
+                {% endif %}
+            </tr>
+            <tr>
+                <th rowspan="3">MAIN CAMERA</th>
+                <th>Type</th>
+                <td>{{product1_specs.main_camera_type}}</td>
+                {% if product2_specs %}
+                <td>{{ product2_specs.main_camera_type }}</td>
+                {% endif %}
+            </tr>
+            <tr>
+                <th>Features</th>
+                <td>{{product1_specs.main_camera_features}}</td>
+                {% if product2_specs %}
+                <td>{{ product2_specs.main_camera_features }}</td>
+                {% endif %}
+            </tr>
+            <tr>
+                <th>Video</th>
+                <td>{{product1_specs.main_camera_video}}</td>
+                {% if product2_specs %}
+                <td>{{ product2_specs.main_camera_video }}</td>
+                {% endif %}
+            </tr>
+            <tr>
+                <th rowspan="3">SELFIE CAMERA</th>
+                <th>Type</th>
+                <td>{{product1_specs.selfie_camera_type}}</td>
+                {% if product2_specs %}
+                <td>{{ product2_specs.selfie_camera_type }}</td>
+                {% endif %}
+            </tr>
+            <tr>
+                <th>Features</th>
+                <td>{{product1_specs.selfie_camera_features}}</td>
+                {% if product2_specs %}
+                <td>{{ product2_specs.selfie_camera_features }}</td>
+                {% endif %}
+            </tr>
+            <tr>
+                <th>Video</th>
+                <td>{{product1_specs.selfie_camera_video}}</td>
+                {% if product2_specs %}
+                <td>{{ product2_specs.selfie_camera_video }}</td>
+                {% endif %}
+            </tr>
+            <tr>
+                <th rowspan="2">SOUND</th>
+                <th>Loudspeaker</th>
+                <td>{{product1_specs.loudspeaker}}</td>
+                {% if product2_specs %}
+                <td>{{ product2_specs.loudspeaker }}</td>
+                {% endif %}
+            </tr>
+            <tr>
+                <th>3.5mm Jack</th>
+                <td>{{product1_specs._3_5mm_jack}}</td>
+                {% if product2_specs %}
+                <td>{{ product2_specs._3_5mm_jack }}</td>
+                {% endif %}
+            </tr>
+            <tr>
+                <th rowspan="6">COMMS</th>
+                <th>WLAN</th>
+                <td>{{product1_specs.WLAN}}</td>
+                {% if product2_specs %}
+                <td>{{ product2_specs.WLAN }}</td>
+                {% endif %}
+            </tr>
+            <tr>
+                <th>Bluetooth</th>
+                <td>{{product1_specs.bluetooth}}</td>
+                {% if product2_specs %}
+                <td>{{ product2_specs.bluetooth }}</td>
+                {% endif %}
+            </tr>
+            <tr>
+                <th>Positioning</th>
+                <td>{{product1_specs.positioning}}</td>
+                {% if product2_specs %}
+                <td>{{ product2_specs.positioning }}</td>
+                {% endif %}
+            </tr>
+            <tr>
+                <th>NFC</th>
+                <td>{{product1_specs.NFC}}</td>
+                {% if product2_specs %}
+                <td>{{ product2_specs.NFC }}</td>
+                {% endif %}
+            </tr>
+            <tr>
+                <th>Radio</th>
+                <td>{{product1_specs.radio}}</td>
+                {% if product2_specs %}
+                <td>{{ product2_specs.radio }}</td>
+                {% endif %}
+            </tr>
+            <tr>
+                <th>USB</th>
+                <td>{{product1_specs.USB}}</td>
+                {% if product2_specs %}
+                <td>{{ product2_specs.USB }}</td>
+                {% endif %}
+            </tr>
+            <tr>
+                <th>FEATURES</th>
+                <th>Sensors</th>
+                <td>{{product1_specs.sensors}}</td>
+                {% if product2_specs %}
+                <td>{{ product2_specs.sensors }}</td>
+                {% endif %}
+            </tr>
+            <tr>
+                <th rowspan="2">BATTERY</th>
+                <th>Type</th>
+                <td>{{product1_specs.battery_type}}</td>
+                {% if product2_specs %}
+                <td>{{ product2_specs.battery_type }}</td>
+                {% endif %}
+            </tr>
+            <tr>
+                <th>Charging</th>
+                <td>{{product1_specs.charging}}</td>
+                {% if product2_specs %}
+                <td>{{ product2_specs.charging }}</td>
+                {% endif %}
+            </tr>
+            <tr>
+                <th rowspan="2">MISC</th>
+                <th>Colors</th>
+                <td>{{product1_specs.colors}}</td>
+                {% if product2_specs %}
+                <td>{{ product2_specs.colors }}</td>
+                {% endif %}
+            </tr>
+            <tr>
+                <th>Models</th>
+                <td>{{product1_specs.models}}</td>
+                {% if product2_specs %}
+                <td>{{ product2_specs.models }}</td>
+                {% endif %}
+            </tr>
+        </table>
+    </div>
+{%endblock%}

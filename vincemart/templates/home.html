@@ -1,0 +1,133 @@
+{%extends 'base.html'%}
+<!-----------header--------------->
+{%block header%}
+<div class="header">
+    <div class="container">
+        {{ super()}}
+        <div class="row">
+            <div class="col-2">
+                <h1>Elevate Your Lifestyle with Innovative Tech Essentials!</h1>
+                <p>Unleashing the Power of Tomorrow's Technology Solutions, Elevating Your Digital Experience to New Heights of <br>Convenience, Connectivity, and Creativity!</p>
+                <a href="{{url_for('account')}}" class="btn">Sign Up Now &#8594;</a>
+            </div>
+            <div class="col-2">
+                <img src="static\images\bg-image.png">
+            </div>
+        </div>
+    </div>
+</div>
+{%endblock%}
+
+<!-- ------------main section------------- -->
+{%block main%}
+    <!-- featured categories -->
+    <div class="categories">
+        <div class="small-container">
+            <div class="row">
+                <div class="col-3">
+                    <img src="static\images\category-2.jpg">
+                </div>
+                <div class="col-3">
+                    <img src="static\images\category-3.jpg">
+                </div>
+                <div class="col-3">
+                    <img src="static\images\category-1.jpg">
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- featured products -->
+    <div class="small-container">
+        <h2 class="title">Feature Products</h2>        
+        {{featured_products|safe}}
+        <h2 class="title">Latest Products</h2>
+        {{latest_products|safe}}
+    </div>  
+    <!-- offer -->
+    <div class="offer">
+        <div class="small-container">
+            <div class="row">
+                <div class="col-2">
+                    <img src="static\images\exclusive.png" class="offer-img" width="80%" height="80%">
+                </div>
+                <div class="col-2">
+                    <p>Exclusively Available on VinceMart</p>
+                    <h1>Iphone 16 Pro Max</h1>
+                    <small>The iPhone 16 Pro Max is a high-end smartphone with a large 6.9-inch Super Retina XDR OLED display, a powerful A18 Pro chip, and a quad-camera system with a 48MP main sensor, a 48MP ultrawide sensor, a 5x telephoto sensor, and a 12MP front-facing camera. It also has a durable titanium design, a new Action Button for customizable shortcuts, and a long-lasting battery.                  
+                    </small>
+                    <br>
+                    <a href="" class="btn">Buy Now &#8594;</a>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!--------testimonial--------->
+    <div class="testimonial">
+        <div class="small-container">
+            <div class="row">
+                <div class="col-3">
+                    <i class="fa-solid fa-quote-left"></i>
+                    <p>My experience with the vincemart smartphone website was excellent, and I would highly recommend it to anyone looking to purchase a new smartphone (cause mine is fuckin great). I will definitely be returning for any future smartphone needs.</p>
+                    <div class="rating">
+                        <i class="fa-solid fa-star"></i>
+                        <i class="fa-solid fa-star"></i>
+                        <i class="fa-solid fa-star"></i>
+                        <i class="fa-solid fa-star"></i>
+                        <i class="fa-solid fa-star"></i>
+                    </div>
+                    <img src="static\images\user-1.webp">
+                    <h3>Zendaya</h3>
+                </div>
+                <div class="col-3">
+                    <i class="fa-solid fa-quote-left"></i>
+                    <p>I recently purchased a smartphone from the vincemart smartphone website, and I must say I am thoroughly impressed with the overall experience. The website's user interface is sleek and intuitive, making it easy to navigate through a wide range of smartphones available.</p>
+                    <div class="rating">
+                        <i class="fa-solid fa-star"></i>
+                        <i class="fa-solid fa-star"></i>
+                        <i class="fa-solid fa-star"></i>
+                        <i class="fa-solid fa-star"></i>
+                        <i class="fa-solid fa-star"></i>
+                    </div>
+                    <img src="static\images\user-2.avif">
+                    <h3>Drake Graham</h3>
+                </div>
+                <div class="col-3">
+                    <i class="fa-solid fa-quote-left"></i>
+                    <p>The product descriptions were detailed and informative, helping me make an informed decision about which smartphone to purchase. The website also provided clear images from various angles, allowing me to get a good look at the product before buying.</p>
+                    <div class="rating">
+                        <i class="fa-solid fa-star"></i>
+                        <i class="fa-solid fa-star"></i>
+                        <i class="fa-solid fa-star"></i>
+                        <i class="fa-solid fa-star"></i>
+                        <i class="fa-solid fa-star"></i>
+                    </div>
+                    <img src="static\images\user-3.jpg">
+                    <h3>P.Diddy</h3>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- ---------brands--------- -->
+    <div class="brands">
+        <div class="small-container">
+            <div class="row">
+                <div class="col-5">
+                    <img src="static\images\logo-iphone.png">
+                </div>
+                <div class="col-5">
+                    <img src="static\images\logo-samsung.png">
+                </div>
+                <div class="col-5">
+                    <img src="static\images\logo-huawei.png">
+                </div>
+                <div class="col-5">
+                    <img src="static\images\logo-oppo.png">
+                </div>
+                <div class="col-5">
+                    <img src="static\images\logo-vivo.png">
+                </div>
+            </div>
+        </div>
+    </div>
+{%endblock%}

@@ -1,0 +1,72 @@
+
+create table Products (
+    product_id integer primary key autoincrement, 
+    product_name text not null,
+    description text not null,
+    price real not null,
+    quantity integer not null,
+    product_image text not null,
+    image1 text not null, 
+    image2 text not null, 
+    image3 text not null,
+    image4 text not null,
+    date_added datetime default current_timestamp,
+    brand text not null, 
+    rating float
+);
+
+
+create table Specifications (
+    spec_id integer primary key,
+    announced text,
+    status text,
+    dimensions text,
+    weight text,
+    build text,
+    SIM text,
+    type text,
+    size text,
+    resolution text,
+    protection text,
+    OS text,
+    chipset text,
+    CPU text,
+    GPU text,
+    card_slot text,
+    internal text,
+    main_camera_type text,
+    main_camera_features text,
+    main_camera_video text,
+    selfie_camera_type text,
+    selfie_camera_features text,
+    selfie_camera_video text,
+    loudspeaker text, 
+    "3.5mm_jack" text,
+    WLAN text,
+    bluetooth text,
+    positioning text,
+    NFC text,
+    radio text,
+    USB text,
+    sensors text,
+    battery_type text,
+    charging text,
+    colors text,
+    models text,
+    product_id integer not null,
+    foreign key (product_id) references Products(product_id)
+);
+
+
+insert into data.products(product_id, product_name, description, price, quantity, product_image, image1,image2,image3, image4, date_added, brand, rating
+) select product_id, product_name, description, price, quantity, product_image, image1,image2,image3, image4, date_added, brand, rating from majorproject.products;
+
+insert into data.specifications(announced, status, dimensions, weight, build, SIM, type, size, resolution, protection, OS, chipset, CPU, GPU, card_slot, internal, 
+main_camera_type, main_camera_features, main_camera_video, selfie_camera_type, selfie_camera_features, selfie_camera_video, loudspeaker, _3_5mm_jack, WLAN, 
+bluetooth, positioning, NFC, radio, USB, sensors, battery_type, charging, colors, models, product_id) select announced, status, dimensions, weight, build, SIM,
+type, size, resolution, protection, OS, chipset, CPU, GPU, card_slot, internal, main_camera_type, main_camera_features, main_camera_video, selfie_camera_type, 
+selfie_camera_features, selfie_camera_video, loudspeaker, "3.5mm_jack", WLAN, bluetooth, positioning, NFC, radio, USB, sensors, battery_type, charging, colors, 
+models, product_id from majorproject.Specifications;
+
+delete from specifications;
+delete from products;

@@ -1,0 +1,64 @@
+{%extends 'base.html'%}
+<!-- ---------header------------- -->
+{%block header%}
+<div class="container">
+    {{super()}}        
+</div>
+{%endblock%}
+<!-- ------------main section------------- -->
+{%block main%}
+    <div class="search-products-form">
+        <form action="/searched_products" method="post" id="searchForm">
+            <input type="hidden" name="csrf_token" value="{{ csrf_token() }}"/>
+            <input type="text" name="search" placeholder="Search for products...">
+            <input type="submit" value="Search">
+        </form>
+    </div>
+    <div class="small-container">
+        <div class="row row-2">
+            <h2>All Products</h2>
+            <select id="sortSelect">
+                <option value="default">All Products</option>
+                <option value="price">Sort by price</option>
+                <option value="quantity">Sort by quantity</option>
+                <option value="rating">Sort by rating</option>
+            </select>
+        </div>
+    </div>
+    <div class="small-container" id ="resultContainer">
+        {{default_option|safe}}
+    </div>
+    
+{%endblock%}
+{%block script%}
+<script>
+    const sortSelect = document.getElementById('sortSelect');
+    const resultContainer = document.getElementById('resultContainer');
+
+    sortSelect.addEventListener('change', function() {
+        const selectedValue = this.value;
+        let html = '';
+
+        switch (selectedValue) {
+            case 'default':
+                html = '{{default_option|safe}}'; 
+                break;
+            case 'price':
+                html = '{{price|safe}}'; 
+                break;
+            case 'quantity':
+                html = '{{quantity|safe}}'; 
+                break;
+            case 'rating':
+                html = '{{rating|safe}}'; 
+                break;
+            default:
+                html = '{{default_option|safe}}'; 
+        }
+
+        resultContainer.innerHTML = html;
+    });
+
+
+</script>
+{%endblock%}

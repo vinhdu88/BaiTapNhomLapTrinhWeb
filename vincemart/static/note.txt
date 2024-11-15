@@ -1,0 +1,86 @@
+- Website:
+    VINCEMART: Website mua bán đồ dùng điện tử.
+- Website cung cấp khả năng gì?
+    + Cung cấp khả năng so sánh giữa các thiết bị
+    + Cung cấp khả năng mua hàng trực tuyến
+    + Cho phép bán các mặt hàng điện tử 
+- Website mang lại lợi ích gì?
+    + Tiện lợi
+    + Lựa chọn đa dạng
+    + Tham khảo mặt hàng
+- Website dành cho đối tượng (người sử dụng) nào?
+    + Khách vãng lai
+    + Khách hàng có tài khoản
+    + Người bán hàng
+    + (Có thể) người quản trị
+- Chức năng dành cho từng đối tượng:
+    + Khách vãng lai
+        Tìm kiếm sản phẩm
+        Xem chi tiết sản phẩm
+    + Khách hàng có tài khoản
+        Đăng nhập/ Đăng ký
+        Thêm vào giỏ hàng
+        Thanh toán
+        Đánh giá sản phẩm
+    + Người bán hàng
+        Thêm, sửa, xóa sản phẩm
+        Quản lý đơn hàng
+- Giao diện
+    + Đăng nhập/ Đăng Ký/ Đăng Xuất 
+    + Trang chủ (Home/ Giới thiệu sản phẩm)
+    + Trang sản phẩm
+
+
+
+// Create virtual environment
+python -m venv env   
+//set the execution policy for the current session to allow script execution
+Set-ExecutionPolicy -Scope Process -ExecutionPolicy Bypass
+//activae the ve
+venv\Scripts\activate
+// check if the virtual environment is being activated 
+pip -V 
+
+
+
+// application out of context
+in command line with the path of virtual env
+	$env:FLASK_APP = "demo.py"
+and then
+	flask shell
+henceforth you can work normally with database
+	from demo import db
+	from demo import Item
+	item1 = Item(name = 'Iphone 10', price = 500, barcode = '123456789034', description = 'desc')
+	db.session.add(item1)
+	db.session.commit()
+
+or in the command prompt: from vincemart import app, db
+                          with app.app_context():
+                            db.create_all()
+
+// how to reflect changes from class in sqlalchemy to sqlite
+install flask-migrate
+    pip install Flask-Migrate
+modify your __init__.py: 
+    from flask_migrate import Migrate
+    db = SQLAlchemy(app)
+    migrate = Migrate(app, db)
+specify your FLASK_APP, in your env path
+    $env:FLASK_APP = 'run.py'
+create migrations folder
+    flask db init
+save all changes in class models
+    flask db migrate -m 'first changes'
+migrate to your actual database
+    flask db upgrade
+youtube tutorial link: https://www.youtube.com/watch?v=ca-Vj6kwK7M
+
+
+class Orders(db.Model):
+order_id = db.Column(db.Integer, primary_key=True)
+order_list = db.Column(db.Text, nullable=False)
+order_date = db.Column(db.Date, nullable=False)
+total_amount = db.Column(db.Float, nullable=False)
+user_id = db.Column(db.Integer, db.ForeignKey('users.user_id'))
+user = db.relationship('Users', backref='orders')

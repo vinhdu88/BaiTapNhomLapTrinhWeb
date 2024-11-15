@@ -1,0 +1,65 @@
+{%extends 'base.html'%}
+{%block header%}
+    <div class="container"></div>
+        {{super()}}    
+    </div>
+{%endblock%}
+
+<!-- ------------main section------------- -->
+{%block main%}
+<div class="account-page">
+    <div class="container">
+        <div class="row">
+            <div class="col-2">
+                <img src="static\images\bg-image.png" width="100%">
+            </div>
+            <div class="col-2">
+                <div class="form-container">
+                    <div class="form-btn">
+                        <span onclick="login()">Login</span>
+                        <span onclick="register()">Register</span>
+                        <hr id="Indicator">
+                    </div>
+                    <form id="RegForm" method="post">
+                        {{ register_form.hidden_tag() }}
+                        {{register_form.username(class="input", placeholder="Username")}}
+                        {{register_form.email_address(class="input", placeholder="Email")}}
+                        {{register_form.address(class="input", placeholder="Address")}}
+                        {{register_form.phone(class="input", placeholder="Phone")}}
+                        {{register_form.password1(class="input", placeholder="Password")}}
+                        {{register_form.password2(class="input", placeholder="Confirm Password")}}
+                        <button type="submit" class="btn">Register</button>
+                        <!-- <a href="">Forgot Password</a> -->
+                    </form>
+                    <form id="LoginForm" method="post">       
+                        {{ register_form.hidden_tag() }} 
+                        {{login_form.username(class="input", placeholder="Username")}}  
+                        {{login_form.password(class="input", placeholder="Password")}}             
+                        <button type="submit" class="btn">Login</button>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{%endblock%}
+
+<!-- ---------------js for toggle form----------------- -->
+{%block script%}
+<script>
+    var x=document.getElementById("LoginForm");
+    var y=document.getElementById("RegForm");
+    var z=document.getElementById("Indicator");
+    function register(){
+        x.style.transform="translateX(0px)";
+        y.style.transform="translateX(0px)";
+        z.style.transform="translateX(100px)";
+    }
+
+    function login(){
+        x.style.transform="translateX(300px)";
+        y.style.transform="translateX(300px)";
+        z.style.transform="translateX(0px)";
+    }
+</script>
+{%endblock%}

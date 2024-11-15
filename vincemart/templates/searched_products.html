@@ -1,0 +1,14 @@
+{%extends 'base.html'%}
+<!-- ---------header------------- -->
+{%block header%}
+<div class="container">
+    {{super()}}        
+</div>
+{%endblock%}
+
+{%block main%}
+    <div class="small-container" id ="resultContainer">
+        <h2 style = "margin-bottom: 50px;">Search Results</h2>
+        {{searched_products|safe}}
+    </div>
+{%endblock%}

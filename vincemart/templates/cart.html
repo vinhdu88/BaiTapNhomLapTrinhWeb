@@ -1,0 +1,70 @@
+{%extends 'base.html'%}
+
+{%block header%}
+    <div class="container"></div>
+        {{super()}}    
+    </div>
+{%endblock%}
+
+{%block main%}
+<!-- ---------------------cart items details--------------------- -->
+    <div class="small-container cart-page">
+    <form action="{{url_for('update_cart')}}" method="post">
+        <input type="hidden" name="csrf_token" value="{{ csrf_token() }}"/>
+        <table>
+            <tr>
+                <th>Product</th>
+                <th>Quantity</th>
+                <th>Subtotal</th>
+            </tr>
+            
+            {%for item in carts%}
+            <tr>
+                <td>
+                    <div class="cart-info">
+                        <img src="static\products\{{item['image']}}">
+                        <div>
+                            <p>{{item['product_name']}}</p>
+                            <small>Price: {{item['price']}}</small>
+                            <br>
+                            <a href="/remove_item_from_cart/{{item['product_id']}}">Remove</a>
+                        </div>
+                    </div>
+                </td>
+                <td><input type="number" value="{{item['quantity']}}" name="quantity-{{item['product_id']}}" min="1"></td>
+                <td>${{item['subtotal']}}</td>
+            </tr>
+            {%endfor%}
+            <tr>
+                <td colspan="2">Total</td>
+                <td>${{subtotalP}}</td>
+            </tr>
+        </table>
+        <div class="total-price">
+            <table>
+                <tr>
+                    <td>Subtotal</td>
+                    <td>${{subtotalP}}</td>
+                </tr>
+                <tr>
+                    <td>Delivery Fee</td>
+                    <td>$5.00</td>
+                </tr>
+                <tr>
+                    <td>Total</td>
+                    <td>${{subtotalP+5}}</td>
+                </tr>
+            </table>
+        </div>
+        <input type="submit" value="Update Cart">
+    </form>
+    <div class="checkout">
+        {%if current_user.is_authenticated%}
+        <a href="{{url_for('checkout')}}" class="btn">Buy Now</a>
+        {%else%}
+        <a href="{{url_for('account')}}" class="btn">Buy Now</a>
+        {%endif%}
+    </div>
+
+    </div>
+{%endblock%}

@@ -1,0 +1,115 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script defer src="{{ url_for('static', filename='about.js') }}"></script>
+</head>
+<body>
+    <style>
+        body {
+            background-color: #131313;
+            color: #fff;
+            font-family: 'Poppins', sans-serif;
+            padding: 0;
+            margin: 0;
+        }
+        .small-container {
+            max-width: 1100px;
+            margin: 0 auto;
+            padding: 0 50px;
+        }
+
+        section {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            min-height: 100vh;
+        }
+
+        section a {
+            text-decoration: none;
+            color: #fff;
+            font-size: 1.5rem;
+            margin: 0.5rem;
+            transition: all 200ms ease-in-out;
+        }
+
+        .thanks {
+            display: flex;
+
+        }
+        .logo {
+            padding: 10px;
+        }
+
+        .logo:nth-child(2){
+            transition-delay: 200ms;
+        }
+        .logo:nth-child(3){
+            transition-delay: 400ms;
+        }
+        .logo:nth-child(4){
+            transition-delay: 600ms;
+        }
+
+        .hidden {
+            opacity: 0;
+            filter: blur(5px);
+            transform: translateX(-100%);
+            transition: all 1000ms;
+        }
+
+        @media(prefers-reduced-motion: reduce) {
+            .hidden {
+                transition: none;
+            }
+        }
+
+        .show {
+            opacity: 1;
+            filter: blur(0);
+            transform: translateX(0);
+        }
+    </style>
+    <div class="small-container">
+        <section>
+            <h1 class="hidden">Project: VinceMart</h1>
+            <i class="hidden">A website for shopping smartphones</i>
+        </section>
+
+        <section>
+            <h2>With special thanks to:</h2>
+            <div class="thanks">
+                <div class="logo hidden">
+                    <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcS8tbxgJ-OWHk1E_z0FhTMjoaArfe131F57YQ&s" alt="" width="100px" height="100px">
+                </div>
+                <div class="logo hidden">
+                    <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQ8iNBFcZX3jCyAJXz4maiwYK0-mobodD5FgTdM7ly3fDd9HQHnGXUjE-uj9L-zBzPRSFw&usqp=CAU" alt="" width="100px" height="100px">
+                </div>
+                <div class="logo hidden">
+                    <img src="https://static.vecteezy.com/system/resources/previews/021/608/790/non_2x/chatgpt-logo-chat-gpt-icon-on-black-background-free-vector.jpg" alt="" width="100px" height="100px">
+                </div>
+                <div class="logo hidden">
+                    <img src="https://yt3.googleusercontent.com/DlcaWhXFLA9-StsAGDfq-jBaJq7jSwH0SlhK12UAUFNOsESx_aZLVqGIzQVi1qTQ1CPBJQ93=s900-c-k-c0x00ffffff-no-rj" alt="" width="100px" height="100px">
+                </div>
+            </div>
+        </section>
+
+        <section>
+            <h1 class="hidden">Group 23</h1>
+            <p class="hidden">Member: Du Duc Vinh</p>
+        </section>
+        
+        <section>
+            <h2 class="hidden">Contact Me Through The Email: </h2>
+            <a href="mailto:vinhdu333@gmail.com" class="hidden">Vinh Du</a>
+        </section>
+        <section>
+            <a href="{{url_for('home')}}" class="hidden"><i>Back to Home Page</i></a>
+        </section>
+    </div>
+</body>
+</html>

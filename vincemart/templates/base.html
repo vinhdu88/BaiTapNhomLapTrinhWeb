@@ -1,0 +1,145 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="{{ url_for('static', filename='base.css') }}">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap" rel="stylesheet">
+    <script src="https://kit.fontawesome.com/7355c11167.js" crossorigin="anonymous"></script>
+    <title>All Products - RedStore</title>
+</head>
+<body>
+<!-- ---------header section------------- -->
+
+{%block header%}
+    <div class="navbar">
+        <div class="logo">
+            <a href="{{url_for('home')}}"><img src="{{ url_for('static', filename='images/logo.png') }}" width="125px"></a>
+        </div>
+        <nav>
+            <ul id="MenuItems">
+                <li><a href="{{url_for('home')}}">Home</a></li>
+                <li><a href="{{url_for('products')}}">Products</a></li>
+                <li><a href="{{url_for('about')}}">About</a></li>
+                <li><a href="{{url_for('contact')}}">Contact</a></li>    
+                {%if current_user.is_authenticated%}
+                    <li><a href="{{url_for('logout')}}">Logout</a></li>  
+                    <li>{{current_user.username}}</li>
+                    <li style="color: lawngreen">{{current_user.budget}}$</li>
+                {%else%}
+                    <li><a href="{{url_for('account')}}">Account</a></li>
+                {%endif%}
+            </ul>
+        </nav>
+        <a href="{{url_for('cart')}}"><img src="{{ url_for('static', filename='images/cart.png') }}" width="30px"></a>
+        <img src="{{ url_for('static', filename='images/menu.png') }}" class="menu-icon" onclick="menutoggle()">
+    </div>
+{%endblock%}
+
+
+<!-- ----------alert message------------>
+{%with messages = get_flashed_messages(with_categories=True)%}
+{%if messages%}
+    <div id="toast_box">
+        {%for category, message in messages%}
+            <div class="alert alert-{{category}}">
+                <div class="alert-message">
+                    {{message}}
+                </div>
+            </div>
+        {%endfor%}
+    </div>
+{%endif%}
+{%endwith%}
+
+<!-- ------------main section------------- -->
+ {%block main%}
+    
+ {%endblock%}
+
+<!-- ---------footer---------- -->
+ <div class="footer">
+    <div class="container">
+        <div class="row">
+            <div class="footer-col-1">
+                <h3>Download Our App</h3>
+                <p>Download App for Android and ios mobile phone</p>
+                <div class="app-logo">
+                    <img src="{{ url_for('static', filename='images/play-store.png') }}">
+                    <img src="{{ url_for('static', filename='images/app-store.png') }}">
+                </div>
+            </div>
+            <div class="footer-col-2">
+                <img src="{{ url_for('static', filename='images/logo-white.png') }}">
+                <p>Our Purpose Is To Sustainably Make The Pleasure And Benefits Of Technologies Accessible To The Many</p>
+            </div>
+            <div class="footer-col-3">
+                <h3>Useful Links</h3>
+                <ul>
+                    <li>Coupons</li>
+                    <li>Blog Post</li>
+                    <li>Return Policy</li>
+                    <li>Join Affiliate</li>
+                </ul>
+            </div>
+            <div class="footer-col-4">
+                <h3>Follow Us</h3>
+                <ul>
+                    <li>Facebook</li>
+                    <li>Twitter</li>
+                    <li>Instagram</li>
+                    <li>Youtube</li>
+                </ul>
+            </div>
+        </div>
+    </div>
+ </div>
+
+
+
+
+ <script>
+     //-- -- ------------js for toggle menu -------------
+     var MenuItems = document.getElementById("MenuItems");
+    MenuItems.style.maxHeight = "0px";
+    function menutoggle(){
+        if(MenuItems.style.maxHeight == "0px"){
+            MenuItems.style.maxHeight = "200px"
+        }else{
+            MenuItems.style.maxHeight = "0px"
+        }
+    }
+    // -------------- js for alert ----------------
+    document.addEventListener("DOMContentLoaded", function() {
+        var alerts = document.querySelectorAll('.alert');
+
+        alerts.forEach(function(alert) {
+            var category = alert.classList[1].split('-')[1]; // Get category from class
+            var icon;
+
+            if (category === 'error') {
+                icon = '<div class="alert-icon"><i class="fa-solid fa-circle-xmark"></i></div>';
+            } else if (category === 'danger') {
+                icon = '<div class="alert-icon"><i class="fa-solid fa-circle-exclamation"></i></div>';
+            } else if (category === 'success') {
+                icon = '<div class="alert-icon"><i class="fa-solid fa-circle-check"></i></div>';
+            } else {
+                
+            }
+
+            alert.innerHTML = icon + ' ' + alert.innerHTML;
+        });
+        setTimeout(function() {
+            alerts.forEach(function(alert) {
+                alert.remove();
+            });
+        }, 5000);
+    });
+    
+  </script>
+<!-- ---------sript-------------->
+ {%block script%}
+ {%endblock%}
+</body>
+</html>
